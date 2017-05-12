@@ -50,3 +50,7 @@ go get -u github.com/go-redis/redis
 
 go get gopkg.in/mgo.v2
 
+## Install Web API
+
+go get gopkg.in/kataras/iris.v6
+
