@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-
+	"time"
 	"github.com/solher/arangolite"
 )
 
@@ -16,15 +16,29 @@ func main() {
 		LoggerOptions(false, false, false).
 		Connect("http://10.47.2.151:1031", "_system", "root", "rootPassword")
 
+	now1 := time.Now()
+	nano1 := now1.UnixNano()
+	//fmt.Println("\nTime before the creation of the new database: ", now1)
+	//fmt.Println(nano1)
+
+	// creation of the database
 	_, _ = db.Run(&arangolite.CreateDatabase{
-		Name: "testDB",
+		Name: "boniface",
 		Users: []map[string]interface{}{
 			{"username": "root", "passwd": "rootPassword"},
 			{"username": "user", "passwd": "password"},
 		},
 	})
 
-	db.SwitchDatabase("testDB").SwitchUser("user", "password")
+	now2 := time.Now()
+	nano2 := now2.UnixNano()
+	//fmt.Println("\nTime after the creation of the database: ", now2)
+	//fmt.Println(nano2)
+
+	diff := nano2 - nano1
+	fmt.Println("\nTime to create the new database: ", diff, " ns\n")
+
+	db.SwitchDatabase("boniface").SwitchUser("user", "password")
 
 	_, _ = db.Run(&arangolite.CreateCollection{Name: "nodes"})
 
