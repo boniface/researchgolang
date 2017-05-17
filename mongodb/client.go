@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type Student struct{
@@ -64,4 +65,28 @@ func main() {
 	}
 
 	fmt.Println("Document inserted successfully!")
+
+	stud := "Anthony"
+
+	now3 := time.Now()
+	nano3 := now3.UnixNano()
+	//fmt.Println("\nTime before reading the document: ", now3)
+	//fmt.Println(nano3)
+
+	age, err := coll.Find(bson.M{"name": stud}).Count()
+
+	now4 := time.Now()
+	nano4 := now4.UnixNano()
+	//fmt.Println("\nTime after reading the document: ", now4)
+	//fmt.Println(nano4)
+
+	diff2 := nano4 - nano3
+	fmt.Println("\nTime to read the document: ", diff2, " ns\n")
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("%s appears %d times in the document.\n", stud, age)
+
 }
