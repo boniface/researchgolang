@@ -1,11 +1,9 @@
 package main
 
-import(
+import (
 	"fmt"
 	"time"
-	"net"
 	"gopkg.in/mgo.v2"
-	"crypto/tls"
 )
 
 type Student struct{
@@ -19,7 +17,7 @@ func main() {
 		Host     = "10.47.2.8:27017"
 		Username = ""
 		Password = ""
-		Database = "Test"
+		Database = "NewTest"
 		Collection = "TestStudent"
 	)
 
@@ -34,9 +32,6 @@ func main() {
 		Username: Username,
 		Password: Password,
 		Database: Database,
-		DialServer: func(addr *mgo.ServerAddr) (net.Conn, error) {
-			return tls.Dial("tcp", addr.String(), &tls.Config{})
-		},
 	})
 
 	if err != nil {
@@ -45,7 +40,7 @@ func main() {
 
 	defer session.Close()
 
-	fmt.Println("Connected to %v!\n", session.LiveServers())
+	fmt.Println("\nConnected to", session.LiveServers())
 
 	coll := session.DB(Database).C(Collection)
 
