@@ -85,6 +85,7 @@ func main() {
 
 	// list all tweets
 	iter := session.Query(`SELECT id, text FROM tweet WHERE timeline = ?`, "me").Iter()
+
 	for iter.Scan(&id, &text) {
 		fmt.Println("Tweet:", id, text)
 	}

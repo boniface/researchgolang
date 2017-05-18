@@ -87,6 +87,6 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("%s appears %d times in the document.\n", stud, age)
+	fmt.Printf("%s appears %d times.\n", stud, age)
 
 }

@@ -51,7 +51,7 @@ func main () {
 		panic(err)
 	}
 
-	fmt.Println("\nkey", val)
+	fmt.Println("\nkey:", val)
 
 	/*val2, err := client.Get("key2").Result()
 	if err == redis.Nil {
