@@ -1,1 +1,1 @@
-package arangodb
+package main
