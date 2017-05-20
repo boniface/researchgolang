@@ -12,8 +12,7 @@ type Node struct {
 }
 
 func main() {
-	db := arangolite.New().
-		LoggerOptions(false, false, false).
+	db := arangolite.New().	LoggerOptions(false, false, false).
 		Connect("http://10.47.2.151:1031", "_system", "root", "rootPassword")
 
 	now1 := time.Now()

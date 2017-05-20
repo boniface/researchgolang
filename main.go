@@ -3,30 +3,10 @@ package main
 import (
 	"gopkg.in/kataras/iris.v6"
 	"gopkg.in/kataras/iris.v6/adaptors/httprouter"
+	"github.com/boniface/researchgolang/arangodb/arangoapi"
 )
 
-type Company struct {
-	Name  string
-	City  string
-	Other string
-}
 
-// User bind struct
-type Person struct {
-	Firstname string `json:"firstname"`
-	Lastname  string `json:"lastname"`
-	Age       int    `json:"age"`
-}
-
-func MyHandler(ctx *iris.Context) {
-	c := &Company{}
-	if err := ctx.ReadJSON(c); err != nil {
-		ctx.Log(iris.DevMode, err.Error())
-		return
-	}
-
-	ctx.Writef("Company: %#v\n", c)
-}
 
 
 func main() {
@@ -35,21 +15,34 @@ func main() {
 	app.Adapt(iris.DevLogger())
 	app.Adapt(httprouter.New())
 
-	// use postman or whatever to do a POST request
-	// to the http://localhost:8080 with BODY: JSON PAYLOAD
-	// and Content-Type to application/json
-	app.Get("/", MyHandler)
+
+        // ARANGODB
+	app.Get("/arango/read", arangoapi.Read)
+	app.Get("/arango/write", arangoapi.Read)
+	app.Get("/arango/delete", arangoapi.Read)
+	app.Get("/arango/readall", arangoapi.Read)
 
 
-	app.Get("/read", func(ctx *iris.Context) {
-		peter := Person{
-			Firstname: "John",
-			Lastname:  "Doe",
-			Age:       25,
-		}
+	// DO FOR REDIS
+	app.Get("/arango/read", arangoapi.Read)
+	app.Get("/arango/write", arangoapi.Read)
+	app.Get("/arango/delete", arangoapi.Read)
+	app.Get("/arango/readall", arangoapi.Read)
 
-		ctx.JSON(iris.StatusOK, peter)
-	})
+
+	// DO FOR MONGO
+	app.Get("/arango/read", arangoapi.Read)
+	app.Get("/arango/write", arangoapi.Read)
+	app.Get("/arango/delete", arangoapi.Read)
+	app.Get("/arango/readall", arangoapi.Read)
+
+
+	// DO FOR CASSANDRA
+	app.Get("/arango/read", arangoapi.Read)
+	app.Get("/arango/write", arangoapi.Read)
+	app.Get("/arango/delete", arangoapi.Read)
+	app.Get("/arango/readall", arangoapi.Read)
+
 	app.Listen(":8080")
 
 }

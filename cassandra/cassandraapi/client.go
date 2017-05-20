@@ -1,5 +1,5 @@
 
-package main
+package cassandraapi
 import (
 "fmt"
 "log"
