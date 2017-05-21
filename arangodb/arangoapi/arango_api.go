@@ -2,6 +2,8 @@ package arangoapi
 
 import "gopkg.in/kataras/iris.v6"
 import "time"
+import "strconv"
+
 
 
 
@@ -32,29 +34,35 @@ func ReadAll(ctx *iris.Context) {
 }
 
 func Create(ctx *iris.Context) {
-
 	var timer TimeElapsed
 	timer.Startime =time.Now().UnixNano()
 	CreateRecord()
 	timer.Endtime =time.Now().UnixNano()
 	timer.Duration = timer.Endtime-timer.Startime
-
-
 	ctx.JSON(iris.StatusOK, timer)
 }
 
 func CreateInNumbers(ctx *iris.Context) {
 
+	number:= ctx.Param("number")
+	num, err := strconv.ParseInt(number, 10, 64)
+
+	if err != nil{
+		println(" Not a Valid String ", number)
+	}
 
 
 	var timer TimeElapsed
 	timer.Startime =time.Now().UnixNano()
 
-	CreateRecord()
+	var start int64 = 1
 
+	for i := start; i <= num; i++{
+		CreateRecord()
+
+	}
 	timer.Endtime =time.Now().UnixNano()
 	timer.Duration = timer.Endtime-timer.Startime
-
 
 	ctx.JSON(iris.StatusOK, timer)
 }

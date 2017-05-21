@@ -54,3 +54,13 @@ go get gopkg.in/mgo.v2
 
 go get gopkg.in/kataras/iris.v6
 
+## RUNNING THE TEST 
+
+`http://localhost:8080/arango/write/1000`
+
+for creating 1000 object 
+
+`http://localhost:8080/arango/write/1`
+
+For creating 1 object 
+

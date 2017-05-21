@@ -41,9 +41,7 @@ func CreateRecord()  {
 	if err != nil {
 		// Handle error
 	}
-	println("Created document in collection '%s' in database '%s'\n", col.Name(), db.Name(),meta)
-
-
+	println(" The Out Put is ",meta.Key)
 
 
 }
