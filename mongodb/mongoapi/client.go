@@ -5,6 +5,7 @@ import (
 	"time"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+	"github.com/boniface/researchgolang/mongodb/mongoconnection"
 )
 
 type Student struct{
@@ -88,5 +89,50 @@ func main() {
 	}
 
 	fmt.Printf("%s appears %d times.\n", stud, age)
+
+}
+
+func CreateRecord() {
+
+	client, err := mongoconnection.GetConnection()
+	if err != nil {
+		// Handle error
+		println("Problem with the connection to Mongo !!")
+		panic(err)
+	}
+
+}
+
+func ReadRecord(){
+
+	client, err := mongoconnection.GetConnection()
+	if err != nil {
+		// Handle error
+		println("Problem with the connection to Mongo !!")
+		panic(err)
+	}
+
+}
+
+func ReadAllRecord(){
+
+	client, err := mongoconnection.GetConnection()
+	if err != nil {
+		// Handle error
+		println("Problem with the connection to Mongo !!")
+		panic(err)
+	}
+
+}
+
+func DeleteRecord() {
+
+	client, err := mongoconnection.GetConnection()
+
+	if err != nil {
+		// Handle error
+		println("Problem with the connection to Mongo !!")
+		panic(err)
+	}
 
 }
